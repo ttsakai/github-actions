@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - v[0-9]+.[0-9]+.[0-9]+
+    branches-ignore:
+      - master
   workflow_dispatch:
     inputs:
       home:
@@ -35,4 +37,3 @@ jobs:
             echo "::set-output name=image_tag::${{ steps.extract_branch.outputs.branch }}"
           fi
       - run: echo "$GITHUB_CONTEXT
-
