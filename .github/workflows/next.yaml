@@ -2,18 +2,19 @@ name: next
 
 on:
   workflow_run:
-    tags:
-      - v[0-9]+.[0-9]+.[0-9]+
+    # tags:
+    #   - v[0-9]+.[0-9]+.[0-9]+
     workflows:
       - "first"
-    branches:
-      - test/first_job_failure
-      - main
+    # branches:
+    #   - test/first_job_failure
+    #   - main
     types:
       - completed
 
 jobs:
   setup:
     runs-on: ubuntu-20.04
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - run: echo next
