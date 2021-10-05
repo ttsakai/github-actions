@@ -20,7 +20,7 @@ jobs:
         with:
           go-version: "^1.16.0"
 
-  test:
+  test_env_setup:
     runs-on: ubuntu-20.04
     steps:
       - name: Extract branch name/tag
@@ -42,3 +42,13 @@ jobs:
       - run: echo ${GITHUB_REF#refs/heads/}
       - run: echo ${{ steps.extract.outputs.branch }}  ${{ steps.extract.outputs.tag }}
       - run: echo ${{ steps.gen_img_tag.outputs.image_tag }}
+
+  test_composition:
+    runs-on: ubuntu-20.04
+    steps:
+      - id: foo
+        uses: actions/composite-action@v1
+        with:
+          who-to-greet: "Mona the Octocat"
+      - run: echo random-number ${{ steps.foo.outputs.random-number }}
+        shell: bash
