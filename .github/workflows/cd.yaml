@@ -23,14 +23,13 @@ jobs:
   test:
     runs-on: ubuntu-20.04
     steps:
-      - name: Extract branch name
+      - name: Extract branch name/tag
         shell: bash
-        run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
-        id: extract_branch
-      - name: Extract branch name
-        shell: bash
-        run: echo "::set-output name=branch::${GITHUB_REF#refs/tags/}"
-        id: extract_tag
+        run: |
+          echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+          echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
+        id: extract
+
       - name: Set Environment variables
         id: set_env
         run: |
@@ -41,4 +40,4 @@ jobs:
           fi
       - run: cat $GITHUB_EVENT_PATH
       - run: echo ${GITHUB_REF#refs/heads/}
-      - run: echo ${{ steps.extract_branch.outputs.branch }}  ${{ steps.extract_tags.outputs.branch }}
+      - run: echo ${{ steps.extract.outputs.branch }}  ${{ steps.extract.outputs.tag }}
