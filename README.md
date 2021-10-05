@@ -3,5 +3,5 @@ github-actionsの検証、学習用。
 
 # add tag
 ```bash
-gh release create v0.0.4 -t v0.0.4 --repo ttsakai/github-actions --target
+gh release create v0.0.5 -t v0.0.5 --repo ttsakai/github-actions --target
 ```

@@ -2,8 +2,6 @@ name: next
 
 on:
   workflow_run:
-    tags:
-      - v[0-9]+.[0-9]+.[0-9]+
     workflows:
       - "first"
     branches:
@@ -14,6 +12,30 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-20.04
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - run: echo next
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "^1.16.0"
+
+  test_env_setup:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Extract branch name/tag
+        shell: bash
+        run: |
+          echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+          echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
+        id: extract
+
+      - name: Generate image tag
+        id: gen_img_tag
+        run: |
+          if [ ${{ steps.extract_branch.outputs.tag }} = "" ]; then
+            echo "::set-output name=image_tag::${{ steps.extract.outputs.branch }}_${GITHUB_SHA:0:7}"
+          else
+            echo "::set-output name=image_tag::${{ steps.extract.outputs.tag }}"
+          fi
+      - run: cat $GITHUB_EVENT_PATH
+      - run: echo ${GITHUB_REF#refs/heads/}
+      - run: echo ${{ steps.extract.outputs.branch }}  ${{ steps.extract.outputs.tag }}
+      - run: echo ${{ steps.gen_img_tag.outputs.image_tag }}
