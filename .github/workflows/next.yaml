@@ -1,0 +1,16 @@
+name: next
+
+on:
+  workflow_run:
+    workflows:
+      - "first"
+    branches:
+      - main
+    types:
+      - completed
+
+jobs:
+  setup:
+    runs-on: ubuntu-20.04
+    steps:
+    - run: echo next
