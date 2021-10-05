@@ -1,0 +1,54 @@
+name: first
+
+on:
+  push:
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
+    branches-ignore:
+      - main
+  workflow_dispatch:
+    inputs:
+      home:
+        description: "Debug"
+        required: false
+
+jobs:
+  setup:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "^1.16.0"
+
+  test_env_setup:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Extract branch name/tag
+        shell: bash
+        run: |
+          echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+          echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
+        id: extract
+
+      - name: Generate image tag
+        id: gen_img_tag
+        run: |
+          if [ ${{ steps.extract_branch.outputs.tag }} = "" ]; then
+            echo "::set-output name=image_tag::${{ steps.extract.outputs.branch }}_${GITHUB_SHA:0:7}"
+          else
+            echo "::set-output name=image_tag::${{ steps.extract.outputs.tag }}"
+          fi
+      - run: cat $GITHUB_EVENT_PATH
+      - run: echo ${GITHUB_REF#refs/heads/}
+      - run: echo ${{ steps.extract.outputs.branch }}  ${{ steps.extract.outputs.tag }}
+      - run: echo ${{ steps.gen_img_tag.outputs.image_tag }}
+
+  test_composition:
+    runs-on: ubuntu-20.04
+    steps:
+      - id: foo
+        uses: ttsakai/composite-action@v1.5
+        with:
+          who-to-greet: "Mona the Octocat"
+      - run: echo random-number ${{ steps.foo.outputs.random-number }}
+        shell: bash
