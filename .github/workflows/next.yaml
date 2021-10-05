@@ -23,7 +23,7 @@ jobs:
         id: extract
 
       - name: Generate image tag
-        if: steps.extract.outputs == 'master'
+        if: steps.extract.outputs == 'main'
         id: gen_img_tag
         run: |
           if [ ${{ steps.extract.outputs.tag }} = "" ]; then
@@ -31,11 +31,11 @@ jobs:
           else
             echo "::set-output name=image_tag::${{ steps.extract.outputs.tag }}"
           fi
-      - if: steps.extract.outputs == 'master'
+      - if: steps.extract.outputs == 'main'
         run: cat $GITHUB_EVENT_PATH
-      - if: steps.extract.outputs == 'master'
+      - if: steps.extract.outputs == 'main'
         run: echo ${GITHUB_REF#refs/heads/}
-      - if: steps.extract.outputs == 'master'
+      - if: steps.extract.outputs == 'main'
         run: echo ${{ steps.extract.outputs.branch }}  ${{ steps.extract.outputs.tag }}
-      - if: steps.extract.outputs == 'master'
+      - if: steps.extract.outputs == 'main'
         run: echo ${{ steps.gen_img_tag.outputs.image_tag }}
