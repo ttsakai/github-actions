@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - id: foo
-        uses: ttsakai/composite-action@v1.4
+        uses: ttsakai/composite-action@v1.5
         with:
           who-to-greet: "Mona the Octocat"
       - run: echo random-number ${{ steps.foo.outputs.random-number }}
