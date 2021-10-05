@@ -2,13 +2,13 @@ name: next
 
 on:
   workflow_run:
-    # tags:
-    #   - v[0-9]+.[0-9]+.[0-9]+
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
     workflows:
       - "first"
-    # branches:
-    #   - test/first_job_failure
-    #   - main
+    branches:
+      - test/job_failure
+      - main
     types:
       - completed
 
