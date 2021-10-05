@@ -35,3 +35,4 @@ jobs:
             echo "::set-output name=image_tag::${{ steps.extract_branch.outputs.branch }}"
           fi
       - run: echo "$GITHUB_CONTEXT
+
