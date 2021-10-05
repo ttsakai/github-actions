@@ -7,7 +7,6 @@ on:
     workflows:
       - "first"
     branches:
-      - test/job_failure
       - main
     types:
       - completed
