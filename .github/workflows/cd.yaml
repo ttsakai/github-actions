@@ -30,8 +30,8 @@ jobs:
           echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
         id: extract
 
-      - name: Set Environment variables
-        id: set_env
+      - name: Generate image tag
+        id: gen_img_tag
         run: |
           if [ ${{ steps.extract_branch.outputs.branch }} -eq "master"]; then
             echo "::set-output name=image_tag::${{ steps.extract_branch.outputs.branch }}_${GITHUB_SHA:0:7}"
@@ -41,3 +41,4 @@ jobs:
       - run: cat $GITHUB_EVENT_PATH
       - run: echo ${GITHUB_REF#refs/heads/}
       - run: echo ${{ steps.extract.outputs.branch }}  ${{ steps.extract.outputs.tag }}
+      - run: echo ${{ steps.gen_img_tag.outputs.image_tag }}}
