@@ -4,20 +4,13 @@ on:
   workflow_run:
     workflows:
       - "first"
-    branches:
-      - main
+    # FIXME: tagを作成した場合以下の判定に通らない。
+    # branches:
+    #   - main
     types:
       - completed
 
 jobs:
-  setup:
-    runs-on: ubuntu-20.04
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    steps:
-      - uses: actions/setup-go@v2
-        with:
-          go-version: "^1.16.0"
-
   test_env_setup:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-20.04
@@ -28,16 +21,21 @@ jobs:
           echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
           echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
         id: extract
-
+      -
       - name: Generate image tag
+        if: steps.extract.outputs == master
         id: gen_img_tag
         run: |
-          if [ ${{ steps.extract_branch.outputs.tag }} = "" ]; then
+          if [ ${{ steps.extract.outputs.tag }} = "" ]; then
             echo "::set-output name=image_tag::${{ steps.extract.outputs.branch }}_${GITHUB_SHA:0:7}"
           else
             echo "::set-output name=image_tag::${{ steps.extract.outputs.tag }}"
           fi
-      - run: cat $GITHUB_EVENT_PATH
-      - run: echo ${GITHUB_REF#refs/heads/}
-      - run: echo ${{ steps.extract.outputs.branch }}  ${{ steps.extract.outputs.tag }}
-      - run: echo ${{ steps.gen_img_tag.outputs.image_tag }}
+      - if: steps.extract.outputs == master
+        run: cat $GITHUB_EVENT_PATH
+      - if: steps.extract.outputs == master
+        run: echo ${GITHUB_REF#refs/heads/}
+      - if: steps.extract.outputs == master
+        run: echo ${{ steps.extract.outputs.branch }}  ${{ steps.extract.outputs.tag }}
+      - if: steps.extract.outputs == master
+        run: echo ${{ steps.gen_img_tag.outputs.image_tag }}
