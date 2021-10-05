@@ -12,12 +12,14 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-20.04
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/setup-go@v2
         with:
           go-version: "^1.16.0"
 
   test_env_setup:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Extract branch name/tag
