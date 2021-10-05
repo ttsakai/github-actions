@@ -33,7 +33,7 @@ jobs:
       - name: Generate image tag
         id: gen_img_tag
         run: |
-          if [ ${{ steps.extract_branch.outputs.branch }} -eq "master" ]; then
+          if [ ${{ steps.extract_branch.outputs.tag }} = "" ]; then
             echo "::set-output name=image_tag::${{ steps.extract.outputs.branch }}_${GITHUB_SHA:0:7}"
           else
             echo "::set-output name=image_tag::${{ steps.extract.outputs.tag }}"
