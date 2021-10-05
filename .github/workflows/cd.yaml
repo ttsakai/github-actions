@@ -41,4 +41,4 @@ jobs:
       - run: cat $GITHUB_EVENT_PATH
       - run: echo ${GITHUB_REF#refs/heads/}
       - run: echo ${{ steps.extract.outputs.branch }}  ${{ steps.extract.outputs.tag }}
-      - run: echo ${{ steps.gen_img_tag.outputs.image_tag }}}
+      - run: echo ${{ steps.gen_img_tag.outputs.image_tag }}
