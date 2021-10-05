@@ -2,10 +2,7 @@ name: first
 
 on:
   push:
-    tags:
-      - v[0-9]+.[0-9]+.[0-9]+
-    branches-ignore:
-      - main
+
   workflow_dispatch:
     inputs:
       home:
