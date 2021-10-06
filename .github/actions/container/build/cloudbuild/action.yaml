@@ -19,8 +19,8 @@ runs:
     - name: Install Dependency
       shell: bash
       run: |
-        apt -y install jq python3-pip 
-        pip3 install yq
+        sudo apt -y install jq python3-pip 
+        sudo pip3 install yq
 
     - name: gen cludbuild.json
       shell: bash
