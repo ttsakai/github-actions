@@ -1,5 +1,10 @@
 name: first
 
+defaults:
+  run:
+    shell: bash
+    working-directory: /go/src/github.com/ttsakai
+
 on:
   push:
     # tags:
@@ -17,6 +22,8 @@ jobs:
   test_composition:
     runs-on: ubuntu-20.04
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - id: foo
         uses: ttsakai/composite-action@v1.5
         with:
@@ -24,8 +31,5 @@ jobs:
       - run: echo random-number ${{ steps.foo.outputs.random-number }}
         shell: bash
       # - run: exit 1
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: CI
         uses: ./.github/actions/sample
-        working-directory: ./

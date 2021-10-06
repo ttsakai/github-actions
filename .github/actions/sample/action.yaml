@@ -20,4 +20,4 @@ runs:
     - name: Lint
       shell: bash
       # run: make lint
-      run: echo "make lint"
+      run: pwd
