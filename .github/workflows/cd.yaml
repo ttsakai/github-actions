@@ -10,7 +10,7 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: /go/src/github.com/ttsakai
+    # working-directory: /go/src/github.com/ttsakai
 
   # workflow_run:
   #   workflows:
