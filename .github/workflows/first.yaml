@@ -24,12 +24,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - id: foo
-        uses: ttsakai/composite-action@v1.5
-        with:
-          who-to-greet: "Mona the Octocat"
-      - run: echo random-number ${{ steps.foo.outputs.random-number }}
-        shell: bash
+      # - id: foo
+      #   uses: ttsakai/composite-action@v1.5
+      #   with:
+      #     who-to-greet: "Mona the Octocat"
+      # - run: echo random-number ${{ steps.foo.outputs.random-number }}
+      #   shell: bash
       # - run: exit 1
       - name: CI
         uses: ./.github/actions/sample
