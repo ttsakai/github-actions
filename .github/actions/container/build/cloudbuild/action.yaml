@@ -39,7 +39,7 @@ runs:
     #     export_default_credentials: true
     - name: Build
       shell: bash
-      run: echo "Cloudbuild run"
+      run: echo "${{ inputs.image_tag }}"
       # run: |
       #   ::group::Build
       #   gcloud builds submit --config=cloudbuild.json \
