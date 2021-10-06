@@ -26,13 +26,12 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: CI
+      - name: Test
         uses: ./.github/actions/golang/test
       - name: Extract branch name/tag
         shell: bash
         run: |
           echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
-          echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
         id: extract
 
       - name: Set image tag to branch name
