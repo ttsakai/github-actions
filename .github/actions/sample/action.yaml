@@ -12,10 +12,10 @@ runs:
       # run: make test
       run: echo "make test"
 
-    - name: golangci setup
-      uses: golangci/golangci-lint-action@v2
-      with:
-        version: v1.29
+    # - name: Run golangci
+    #   uses: golangci/golangci-lint-action@v2
+    #   with:
+    #     version: v1.29
 
     - name: Lint
       shell: bash
