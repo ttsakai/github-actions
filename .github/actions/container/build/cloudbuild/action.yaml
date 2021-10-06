@@ -20,8 +20,8 @@ runs:
       shell: bash
       run: |
         ::group::Install Dependency
-        sudo apt -y install jq python3-pip 
-        sudo pip3 install yq
+          sudo apt -y install jq python3-pip 
+          sudo pip3 install yq
         ::endgroup::
 
     - name: gen cludbuild.json
