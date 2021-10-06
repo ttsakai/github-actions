@@ -19,10 +19,10 @@ runs:
     - name: Install Dependency
       shell: bash
       run: |
-        ::group::Install Dependency
+        echo "::group::Install Dependency"
           sudo apt -y install jq python3-pip 
           sudo pip3 install yq
-        ::endgroup::
+        echo "::endgroup::"
 
     - name: gen cludbuild.json
       shell: bash
