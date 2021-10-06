@@ -1,0 +1,48 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]
+    branches:
+      - "main"
+
+defaults:
+  run:
+    shell: bash
+    working-directory: /go/src/github.com/ttsakai
+
+  # workflow_run:
+  #   workflows:
+  #     - "first"
+  # FIXME: tagを作成した場合以下の判定に通らない。tagsは今の所使えない。
+  # branches:
+  #   - main
+  # types:
+  #   - completed
+
+jobs:
+  cd:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: CI
+        uses: ./.github/actions/golang/test
+      - name: Extract branch name/tag
+        shell: bash
+        run: |
+          echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+          echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
+        id: extract
+
+      - name: Set image tag to branch name
+        if: steps.extract.outputs.branch == 'main'
+        # id: gen_img_tag
+        run: echo "image_tag=${{ steps.extract.outputs.branch }}_${GITHUB_SHA:0:7}" >> $GITHUB_ENV
+
+      - name: Set image tag to tag
+        if: steps.extract.outputs.branch != 'main'
+        run: echo "image_tag=${{ steps.extract.outputs.tag }}" >> $GITHUB_ENV
+
+      - name: Build
+        uses: ./.github/actions/container/build/cloudbuild

@@ -1,4 +1,4 @@
-name: first
+name: CI
 
 defaults:
   run:
@@ -19,11 +19,10 @@ on:
         required: false
 
 jobs:
-  test_composition:
+  ci:
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       # - id: foo
       #   uses: ttsakai/composite-action@v1.5
       #   with:
@@ -31,5 +30,5 @@ jobs:
       # - run: echo random-number ${{ steps.foo.outputs.random-number }}
       #   shell: bash
       # - run: exit 1
-      - name: CI
-        uses: ./.github/actions/sample
+      - name: Test
+        uses: ./.github/actions/golang/test
