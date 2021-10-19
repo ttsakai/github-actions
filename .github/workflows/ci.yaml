@@ -30,3 +30,9 @@ jobs:
       # - run: exit 1
       - name: Test
         uses: ./.github/actions/golang/test
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: false
