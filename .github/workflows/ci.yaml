@@ -7,8 +7,8 @@ defaults:
 
 on:
   push:
-    branches-ignore:
-      - "main"
+  # branches-ignore:
+  #   - "main"
 
   workflow_dispatch:
     inputs:
