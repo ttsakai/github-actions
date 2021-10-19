@@ -31,7 +31,7 @@ jobs:
       - name: Test
         uses: ./.github/actions/golang/test
 
-      - name: Build and push
+      - name: Build
         id: docker_build
         uses: docker/build-push-action@v2
         with:
