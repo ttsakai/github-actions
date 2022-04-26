@@ -36,7 +36,7 @@ runs:
     - name: gen cloudbuild.json with revison
       shell: bash
       if: ${{ inputs.revision != 'empty' }}
-      run: echo ${{ inputs.revison }}
+      run: echo ${{ inputs.revision }}
     
     # - name: Setup gcloud environment
     #   id: setup_gcloud
