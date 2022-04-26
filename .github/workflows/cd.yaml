@@ -49,5 +49,5 @@ jobs:
       - name: Build
         uses: ./.github/actions/container/build/cloudbuild
         with:
-          image-tag: ${{ env.image_tag }}
+          image_tag: ${{ env.image_tag }}
           revision: 1.1.1
