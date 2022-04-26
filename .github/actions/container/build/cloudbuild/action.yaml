@@ -11,8 +11,9 @@ inputs:
   image_tag:
     required: true
     description: image tag
-  revison:
+  revision:
     required: false
+    default: ''
     description: revison for substitution
 runs:
   using: "composite"
