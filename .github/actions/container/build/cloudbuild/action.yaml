@@ -13,7 +13,6 @@ inputs:
     description: image tag
   revision:
     required: false
-    default: empty
     description: revison for substitution
 runs:
   using: "composite"
@@ -28,14 +27,14 @@ runs:
         echo "::endgroup::"
 
     - name: gen cludbuild.json
-      if: ${{ inputs.revision == 'empty' }}
+      if: ${{ inputs.revision == '' }}
       shell: bash
       # run: cat cloudbuild.template.yaml | yq 'del(.references)' > cloudbuild.json
       run: echo "gen template here"
     
     - name: gen cloudbuild.json with revison
       shell: bash
-      if: ${{ inputs.revision != 'empty' }}
+      if: ${{ inputs.revision != '' }}
       run: echo ${{ inputs.revision }}
     
     # - name: Setup gcloud environment
