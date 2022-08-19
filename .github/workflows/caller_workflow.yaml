@@ -14,7 +14,7 @@ on:
         required: false
 
 jobs:
-  call_eusable:
-    - uses: ./.github/workflows/called_workflow.yaml
-      with:
-        value: value from caller
+  call_reusable:
+    uses: ./.github/workflows/called_workflow.yaml
+    with:
+      value: value from caller
