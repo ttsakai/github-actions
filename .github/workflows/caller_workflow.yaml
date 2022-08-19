@@ -14,10 +14,7 @@ on:
         required: false
 
 jobs:
-  ci:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/workflows/called_workflow.yaml
-        with:
-          value: value from caller
+  call_eusable:
+    - uses: ./.github/workflows/called_workflow.yaml
+      with:
+        value: value from caller
