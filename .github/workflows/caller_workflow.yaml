@@ -1,0 +1,22 @@
+name: CI
+
+defaults:
+  run:
+    shell: bash
+    working-directory: /go/src/github.com/ttsakai
+
+on:
+  workflow_dispatch:
+    inputs:
+      home:
+        description: "Debug"
+        required: false
+
+jobs:
+  ci:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ttsakai/github-actions/.github/workflow/called_workflow.yaml@master
+        with:
+          value: value from caller

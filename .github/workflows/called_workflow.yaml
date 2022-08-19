@@ -1,0 +1,30 @@
+name: CI
+
+defaults:
+  run:
+    shell: bash
+
+on:
+  workflow_call:
+    inputs:
+      value:
+        description: "input test"
+        required: true
+        type: string
+    secrets:
+      token:
+        required: false
+
+jobs:
+  ci:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: step1
+        id: step_1
+        run: echo step1 ${{ inputs.value }}
+
+      - name: step2
+        id: step_2
+        run: echo step2 ${{ inputs.value }}
