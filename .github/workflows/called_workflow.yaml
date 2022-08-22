@@ -1,4 +1,4 @@
-name: reusable called
+name: CI
 
 defaults:
   run:
@@ -23,8 +23,8 @@ jobs:
 
       - name: step1
         id: step_1
-        run: echo step1 ${{ inputs.value }}
+        run: echo step1
 
       - name: step2
         id: step_2
-        run: echo step2 ${{ inputs.value }}
+        run: echo step2

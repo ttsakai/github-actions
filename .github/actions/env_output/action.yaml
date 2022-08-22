@@ -7,7 +7,7 @@ outputs:
   cluster_name:
     description: "cluster name"
     value: ${{ steps.set_outputs.outputs.cluster_name }}
-  location:
+  cluster_location:
     description: "cluster location"
     value: ${{ steps.set_outputs.outputs.cluster_location }}
 runs:
@@ -30,8 +30,4 @@ runs:
       shell: bash
       run: |
         echo "::set-output name=cluster_name::$(echo $cluster_name)"
-
-    - id: set_outputs_2
-      shell: bash
-      run: |
         echo "::set-output name=cluster_location::$(echo $cluster_location)"
