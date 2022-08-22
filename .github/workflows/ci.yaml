@@ -21,13 +21,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      # - id: foo
-      #   uses: ttsakai/composite-action@v1.5
-      #   with:
-      #     who-to-greet: "Mona the Octocat"
-      # - run: echo random-number ${{ steps.foo.outputs.random-number }}
-      #   shell: bash
-      # - run: exit 1
       - name: Test
         uses: ./.github/actions/golang/test
 
@@ -36,3 +29,12 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: false
+      - uses: ./.github/actions/golang/test
+        id: set_env
+        with:
+          project_id: test_project
+
+      - name: show output
+        run: |
+          echo  ${{ steps.set_env.outputs.cluster_name }}
+          echo  ${{ steps.set_env.outputs.cluster_location }}

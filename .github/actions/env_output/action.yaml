@@ -1,0 +1,27 @@
+name: "set env"
+inputs:
+  project_id:
+    description: "project id"
+    required: true
+outputs:
+  cluster_name:
+    description: "cluster name"
+    value: ${{ steps.set_outputs.outputs.cluster_name }}
+  location:
+    description: "cluster location"
+    value: ${{ steps.set_outputs.outputs.cluster_location }}
+runs:
+  using: "composite"
+
+  steps:
+    - id: set
+      shell: bash
+      run: |
+        echo "cluster_location=asia-northeast1" >> $GITHUB_ENV
+        echo "cluster_name=cluster" >> $GITHUB_ENV
+
+    - id: set_outputs
+      shell: bash
+      run: |
+        echo "::set-output name=cluster_name::$(echo $cluster_name)"
+        echo "::set-output name=cluster_location::$(echo $cluster_location)"
