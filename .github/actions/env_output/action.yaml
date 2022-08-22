@@ -20,6 +20,12 @@ runs:
         echo "cluster_location=asia-northeast1" >> $GITHUB_ENV
         echo "cluster_name=cluster" >> $GITHUB_ENV
 
+    - id: show
+      shell: bash
+      run: |
+        echo $cluster_location
+        echo $cluster_name
+
     - id: set_outputs
       shell: bash
       run: |
