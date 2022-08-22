@@ -24,17 +24,17 @@ jobs:
       - name: Test
         uses: ./.github/actions/golang/test
 
-      - name: Build
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          push: false
-      - uses: ./.github/actions/golang/test
+      # - name: Build
+      #   id: docker_build
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     push: false
+      - uses: ./.github/actions/env_output
         id: set_env
         with:
           project_id: test_project
 
       - name: show output
         run: |
-          echo  ${{ steps.set_env.outputs.cluster_name }}
-          echo  ${{ steps.set_env.outputs.cluster_location }}
+          echo ${{ steps.set_env.outputs.cluster_name }}
+          echo ${{ steps.set_env.outputs.cluster_location }}
