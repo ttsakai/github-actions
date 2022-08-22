@@ -3,7 +3,6 @@ name: CI
 defaults:
   run:
     shell: bash
-    working-directory: /go/src/github.com/ttsakai
 
 on:
   push:
