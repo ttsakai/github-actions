@@ -1,0 +1,43 @@
+name: CI
+
+defaults:
+  run:
+    shell: bash
+
+on:
+  push:
+  # branches-ignore:
+  #   - "main"
+
+  workflow_dispatch:
+    inputs:
+      home:
+        description: "Debug"
+        required: false
+
+jobs:
+  success:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo success
+  error:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo error && exit 1
+  require_test_never_run:
+    runs-on: ubuntu-20.04
+    needs:
+      - success
+      - error
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo test
+  require_test_run:
+    runs-on: ubuntu-20.04
+    needs:
+      - success
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo test
