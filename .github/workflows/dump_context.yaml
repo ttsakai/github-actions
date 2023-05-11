@@ -1,5 +1,11 @@
 name: Context testing
-on: push
+on: 
+  # push:
+  workflow_dispatch:
+    inputs:
+      home:
+        description: "Debug"
+        required: false
 
 jobs:
   dump_contexts_to_log:
