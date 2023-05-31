@@ -1,5 +1,15 @@
 name: Auto merge
-on: 
+
+permissions:
+  actions: read
+  # id-token: write  
+  pull-requests: write
+  # contents: write
+  # packages: read
+  # issues: write
+
+
+on:
   pull_request_target: 
   # workflow_dispatch:
   #   inputs:
