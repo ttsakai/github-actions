@@ -1,11 +1,11 @@
 name: Auto merge
 on: 
   pull_request_target: 
-  workflow_dispatch:
-    inputs:
-      home:
-        description: "Debug"
-        required: false
+  # workflow_dispatch:
+  #   inputs:
+  #     home:
+  #       description: "Debug"
+  #       required: false
 
 jobs:
   auto_merge:
