@@ -5,7 +5,7 @@ defaults:
     shell: bash
 
 on:
-  # push:
+  push:
   # branches-ignore:
   #   - "main"
 
