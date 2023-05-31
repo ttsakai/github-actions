@@ -4,6 +4,7 @@ permissions:
   actions: read
   id-token: write  
   pull-requests: write
+  contents: write
 
 
 on:
