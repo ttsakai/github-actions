@@ -1,5 +1,4 @@
-name: CI
-
+name: Needs test
 defaults:
   run:
     shell: bash
