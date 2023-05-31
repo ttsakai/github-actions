@@ -37,3 +37,6 @@ jobs:
         run: |
           echo ${{ steps.set_env.outputs.cluster_name }}
           echo ${{ steps.set_env.outputs.cluster_location }}
+      - name: cause error
+        run: |
+          exit 1
