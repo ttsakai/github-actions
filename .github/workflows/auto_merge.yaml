@@ -1,5 +1,8 @@
 name: Auto merge
-on: 
+
+permissions:
+  actions: read
+on:
   pull_request_target: 
   workflow_dispatch:
     inputs:
