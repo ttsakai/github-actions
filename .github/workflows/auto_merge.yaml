@@ -5,6 +5,8 @@ permissions:
   id-token: write  
   pull-requests: write
   contents: write
+  packages: read
+  issues: write
 
 
 on:
