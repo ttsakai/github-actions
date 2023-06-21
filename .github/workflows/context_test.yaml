@@ -1,6 +1,6 @@
 name: Context test
 on: 
-  push:
+  # push:
   pull_request: 
   workflow_dispatch:
     inputs:

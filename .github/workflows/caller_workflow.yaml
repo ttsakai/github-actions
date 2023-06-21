@@ -6,7 +6,7 @@ defaults:
     working-directory: /go/src/github.com/ttsakai
 
 on:
-  push:
+  # push:
   workflow_dispatch:
     inputs:
       home:
