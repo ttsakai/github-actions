@@ -3,9 +3,18 @@ name: CI
 defaults:
   run:
     shell: bash
+    
+permissions:
+  actions: read
+  # id-token: write  
+  pull-requests: write
+  # contents: write
+  # packages: read
+  # issues: write
 
 on:
-  push:
+  pull_request:
+  # push:
   # branches-ignore:
   #   - "main"
 
@@ -37,4 +46,27 @@ jobs:
         run: |
           echo ${{ steps.set_env.outputs.cluster_name }}
           echo ${{ steps.set_env.outputs.cluster_location }}
-      # - run: exit 1
+      - run: exit 1
+  auto_merge:
+    needs:
+      - ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Turnstyle
+        uses: softprops/turnstyle@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          same-branch-only: true
+          abort-after-seconds: 10
+      - name: Approve a PR
+        run: gh pr review --approve "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Enable auto-merge for Dependabot PRs
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
