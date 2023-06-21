@@ -46,7 +46,6 @@ jobs:
         run: |
           echo ${{ steps.set_env.outputs.cluster_name }}
           echo ${{ steps.set_env.outputs.cluster_location }}
-      - run: exit 1
   auto_merge:
     needs:
       - ci
