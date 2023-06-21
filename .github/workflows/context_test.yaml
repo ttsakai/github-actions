@@ -1,7 +1,7 @@
 name: Context test
 on: 
   # push:
-  pull_request: 
+  # pull_request: 
   workflow_dispatch:
     inputs:
       home:
