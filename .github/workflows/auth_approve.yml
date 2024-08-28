@@ -1,0 +1,20 @@
+          
+name: approve auto generated pr
+
+permissions:
+  pull-requests: write  
+
+on:
+  pull_request:
+      types:
+        - opened
+
+jobs:
+  approve:
+    if:  startsWith(github.head_ref, 'updatetag')
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - run: |
+          gh pr review ${{ github.event.number }} --approve --repo ${{ github.repository }}
