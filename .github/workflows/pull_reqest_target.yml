@@ -1,0 +1,25 @@
+          
+name: pull request target
+
+on:
+  pull_request_target:
+
+jobs:
+  approve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: |
+          echo "pull request target"
+          echo "github.event.pull_request.title: ${{ github.event.pull_request.title }}"
+          echo "github.event.pull_request.body: ${{ github.event.pull_request.body }}"
+          echo "github.event.pull_request.head.ref: ${{ github.event.pull_request.head.ref }}"
+          echo "github.event.pull_request.head.sha: ${{ github.event.pull_request.head.sha }}"
+          echo "github.event.pull_request.base.ref: ${{ github.event.pull_request.base.ref }}"
+          echo "github.event.pull_request.base.sha: ${{ github.event.pull_request.base.sha }}"
+          echo "github.event.pull_request.number: ${{ github.event.pull_request.number }}"
+          echo "github.event.pull_request.html_url: ${{ github.event.pull_request.html_url }}"
+          echo "github.event.pull_request.user.login: ${{ github.event.pull_request.user.login }}"
+          echo "github.event.pull_request.user.html_url: ${{ github.event.pull_request.user.html_url }}"
+          echo "github.event.pull_request.user.avatar_url: ${{ github.event.pull_request.user.avatar_url }}"
+      - run: ls -ltR
