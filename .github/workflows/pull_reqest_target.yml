@@ -27,4 +27,21 @@ jobs:
           echo "github.event.pull_request.user.login: ${{ github.event.pull_request.user.login }}"
           echo "github.event.pull_request.user.html_url: ${{ github.event.pull_request.user.html_url }}"
           echo "github.event.pull_request.user.avatar_url: ${{ github.event.pull_request.user.avatar_url }}"
+      - name: Display Git Information
+        run: |
+          echo "=== Git Information ==="
+          echo "Current Branch: $(git branch --show-current)"
+          echo "Current HEAD Branch: $(git rev-parse --abbrev-ref HEAD)"
+          echo "Latest Commit Hash (Full): $(git rev-parse HEAD)"
+          echo "Latest Commit Hash (Short): $(git rev-parse --short HEAD)"
+          echo "Latest Commit Author: $(git log -1 --pretty=%an)"
+          echo "Latest Commit Date: $(git log -1 --pretty=%ad)"
+          echo "Latest Commit Message: $(git log -1 --pretty=%B)"
+          echo ""
+          echo "=== Git Status ==="
+          git status
+          echo ""
+          echo "=== Recent Commits ==="
+          git log --oneline -5
       - run: ls -ltR
+      
