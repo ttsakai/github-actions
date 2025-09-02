@@ -3,6 +3,11 @@ name: pull request target
 
 on:
   pull_request_target:
+  workflow_dispatch:
+    inputs:
+      home:
+        description: "Debug"
+        required: false
 
 jobs:
   approve:
